@@ -14,7 +14,6 @@
     "gatsby": "^2.8.2",
     "gatsby-image": "^2.1.2",
     "gatsby-mdx": "^0.6.3",
-    "gatsby-plugin-feed": "^2.2.2",
     "gatsby-plugin-google-analytics": "^2.0.20",
     "gatsby-plugin-manifest": "^2.1.1",
     "gatsby-plugin-offline": "^2.1.1",
@@ -44,6 +43,7 @@
     "@types/node": "^12.0.4",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.17.1"
   },
   "homepage": "https://github.com/buildGoodWeb/blog#readme",
@@ -58,10 +58,10 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "start": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "deploy": "rm -rf public && gatsby build --prefix-paths && yarn docs",
+    "docs": "gh-pages -d public"
   }
 }
