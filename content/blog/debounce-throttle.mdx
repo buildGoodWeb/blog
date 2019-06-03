@@ -1,0 +1,65 @@
+---
+title: Javascript 防抖和节流
+date: "2019-05-01T22:12:03.284Z"
+description: 介绍防抖和节流在 js 中的使用
+---
+
+## debounce 防抖
+```js
+// 防抖
+function debounce(fn, wait) {    
+    var timeout = null;    
+    return function() {        
+        if(timeout !== null)   clearTimeout(timeout);        
+        timeout = setTimeout(fn, wait);    
+    }
+}
+// 处理函数
+function handle() {    
+    console.log(Math.random()); 
+}
+// 滚动事件
+window.addEventListener('scroll', debounce(handle, 1000));
+```
+
+## throttle 节流
+
+```js
+var throttle = function(func, delay) {            
+　　var prev = Date.now();            
+　　return function() {                
+　　　　var context = this;                
+　　　　var args = arguments;                
+　　　　var now = Date.now();                
+　　　　if (now - prev >= delay) {                    
+　　　　　　func.apply(context, args);                    
+　　　　　　prev = Date.now();                
+　　　　}            
+　　}        
+}        
+function handle() {            
+　　console.log(Math.random());        
+}        
+window.addEventListener('scroll', throttle(handle, 1000));
+
+// 节流throttle代码（定时器）：
+var throttle = function(func, delay) {            
+    var timer = null;            
+    return function() {                
+        var context = this;               
+        var args = arguments;                
+        if (!timer) {                    
+            timer = setTimeout(function() {                        
+                func.apply(context, args);                        
+                timer = null;                    
+            }, delay);                
+        }            
+    }        
+}        
+function handle() {            
+    console.log(Math.random());        
+}        
+window.addEventListener('scroll', throttle(handle, 1000));
+```
+- 第一次会立即执行
+- 而后再怎么频繁地触发事件，也都是每delay时间才执行一次
