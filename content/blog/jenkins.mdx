@@ -1,0 +1,17 @@
+---
+title: Docker 启动 Jenkins 服务
+date: 2018-10-09
+description: Jenkins 是由 Java 开发的开源项目，可以持续集成（自动编译、发布、测试）。它的前身是 Hundson。
+---
+
+## 持续集成
+1.每一个环节都是自动完成
+2. 任意时间点都能发现软件集成问题，任意时间发布可部署软件。
+
+## 通过 Docker 安装和启动 Jenkins
+```bash
+docker pull jenkins
+# 创建本地的 Jenkins 配置文件目录
+mkdir /dir/jenkins_home
+docker run -d --name myjenkins -p 49001:8080 -v /dir/jenkins_home:/var/jenkins_home jenkins
+```
