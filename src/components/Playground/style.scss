@@ -1,0 +1,41 @@
+$code-bg: #234361;
+$code-color: #fff;
+$code-error-bg: #f24542;
+
+.playground {
+  &.show {
+    background-color: $code-bg;
+  }
+  border-radius: 4px;
+  padding: 5px;
+  color: $code-color;
+  &-error {
+    background-color: $code-error-bg;
+    border-radius: 4px;
+    pre {
+      padding: 15px;
+      background-color: transparent;
+      border: 0;
+      color: inherit;
+    }
+  }
+  &-view {
+    background-color: #fff;
+    border-radius: 3px;
+    color: #66788a;
+    margin: 4px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    button {
+      padding: 0;
+      opacity: 0;
+      max-height: 30px;
+      transition: opacity .3s ease;
+    }
+    &:hover button {
+      opacity: 1;
+    }
+  }
+}

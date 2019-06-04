@@ -1,10 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Bio from "../components/Bio"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import 'purecss/build/pure-min.css';
+import './style.scss';
 
 class BlogIndex extends React.Component {
   render() {
@@ -19,17 +19,13 @@ class BlogIndex extends React.Component {
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
+            <div key={node.fields.slug} className="all-header">
+              <h3>
                 <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
                   {title}
                 </Link>
+                <span>{node.frontmatter.date}</span>
               </h3>
-              <small>{node.frontmatter.date}</small>
               <p
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
@@ -60,7 +56,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY-MM-DD")
             title
             description
           }

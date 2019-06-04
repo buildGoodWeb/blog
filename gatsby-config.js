@@ -60,7 +60,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/profile.png`,
       },
     },
     {
@@ -81,9 +81,9 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`,
+      resolve: `gatsby-plugin-sass`,
+      cssLoaderOptions: {
+        camelCase: false,
       },
     },
   ],

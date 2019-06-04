@@ -1,0 +1,34 @@
+.main-toc {
+  position: fixed;
+  right: 3rem;
+  top: 2rem;
+  width: inherit;
+  margin-top: 25px;
+  padding-left: 20px;
+  border-left: 1px solid #ececec;
+  & > div {
+    line-height: 2;
+  }
+  &--li {
+    &2 {
+      font-size: 14px;
+    }
+    &3 {
+      font-size: 12px;
+      padding-left: 15px;
+    }
+  }
+  a {
+    color: #777;
+    text-decoration: none;
+    &.current,
+    &:hover {
+      color: #337ab7;
+    }
+  }
+}
+@media(max-width: 900px) {
+  .main-toc {
+    position: static;
+  }
+}

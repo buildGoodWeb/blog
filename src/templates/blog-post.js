@@ -1,67 +1,55 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
+import { MDXProvider } from '@mdx-js/react';
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
+
+import Layout from "../components/Layout"
+import playground from '../components/Playground';
+import LinkedHeading from '../components/LinkedHeading'
+import Toc from '../components/Toc'
+import SEO from "../components/seo"
+
+const components = {
+  h2: props => <LinkedHeading h="2" {...props} />,
+  h3: props => <LinkedHeading h="3" {...props} />,
+  h4: props => <LinkedHeading h="4" {...props} />,
+  code: playground,
+  pre: props => <div className="pre" {...props} />,
+};
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
+    const { headings = [] } = post || {}
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout isPost location={this.props.location} title={siteTitle}>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <h1>{post.frontmatter.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: `block`,
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
-          {post.frontmatter.date}
-        </p>
-        <MDXRenderer>{post.code.body}</MDXRenderer>
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <Bio />
-
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
+        <h1>
+          {post.frontmatter.title}
+          <span>{post.frontmatter.date}</span>
+        </h1>
+        <Toc headings={headings} location={this.props.location}/>
+        <MDXProvider components={components}>
+          <MDXRenderer>{post.code.body}</MDXRenderer>
+        </MDXProvider>
+        <div className="prev-next-nav">
+          {previous && (
+            <Link className="prev-page" to={previous.fields.slug} rel="prev">
+              ← {previous.frontmatter.title}
+            </Link>
+          )}
+          {next && (
+            <Link className="next-page" to={next.fields.slug} rel="next">
+              {next.frontmatter.title} →
+            </Link>
+          )}
+        </div>
       </Layout>
     )
   }
@@ -83,9 +71,13 @@ export const pageQuery = graphql`
       code {
         body
       }
+      headings {
+        value
+        depth
+      }
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
         description
       }
     }

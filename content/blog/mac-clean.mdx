@@ -1,0 +1,18 @@
+---
+title: Mac 清理存储空间
+date: 2019-06-04
+tag: Mac
+description: Mac 使用一段时间后会显示存储空间。收集清理 Mac 的手段。
+---
+## 清理
+### Docker for Mac containers
+```bash
+du -h -d 1  ~/Library/Containers/com.docker.docker 
+docker system prune -a
+```
+## 缓存 Caches
+缓存文件可以直接删除
+
+## 清理软件
+### DaisyDisk
+使用其免费功能查看 Mac 各个部分占用存储空间。
