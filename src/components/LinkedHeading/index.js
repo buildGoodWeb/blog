@@ -2,7 +2,7 @@ import React from 'react';
 import './style.scss';
 
 function LinkedHeading({ h, children, ...props }) {
-  const key = window.encodeURIComponent(children);
+  const key = encodeURIComponent(children);
   const H = `h${h}`;
   return (
     <H id={key} className="heading">

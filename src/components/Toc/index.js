@@ -5,7 +5,7 @@ function Toc({ headings, location }) {
   return (
     <div className="main-toc row">
       {headings.map(({ depth, value }, idx) => {
-        const key = window.encodeURIComponent(value);
+        const key = encodeURIComponent(value);
         const isCurrent = location.hash && location.hash.includes(key);
         return (
           <div key={idx} className={`main-toc--li${depth}`}>
