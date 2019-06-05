@@ -29,9 +29,8 @@ $code-error-bg: #f24542;
     display: flex;
     justify-content: space-between;
     button {
-      padding: 0;
       opacity: 0;
-      max-height: 30px;
+      align-self: flex-end;
       transition: opacity .3s ease;
     }
     &:hover button {
