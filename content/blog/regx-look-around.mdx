@@ -1,0 +1,41 @@
+---
+title: Regx look around
+date: 2019-03-11
+tag: Javascript
+description: 正则表达式的瞻前顾后模式，可以解决很多复杂问题。
+---
+
+## 官方文档
+https://www.regular-expressions.info/lookaround.html
+
+## 前瞻 Look ahead positive
+```js
+A(?=B)
+// ex:
+'abc123'.match(/abc(?=123)/)
+```
+匹配的是 `A`，限制条件是 `A` 前面是 `B`
+
+## 负前瞻 Look ahead negative
+```js
+A(?!B)
+// ex
+'abc456'.match(/abc(?!123)/)
+```
+匹配的是 `A`，限制条件是 `A` 前面不是 `B`
+
+## 后顾 Look behind positive
+```js
+(?<=B)A
+// ex:
+'123abc'.match(/(?<=123)abc/)
+```
+匹配的是 `A`，限制条件是 `A` 后面是 `B`
+
+## 负后顾 Look behind negative
+```js
+(?<!B)A
+// ex
+'456abc'.match(/(?<!123)abc/)
+```
+匹配的是 `A`，限制条件是 `A` 后面不是 `B`
