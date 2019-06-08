@@ -1,0 +1,33 @@
+---
+title: Flex 布局
+date: 2019-05-31
+tags: CSS
+description: Flex 为传统布局提供了新的解决方案。为左右布局、垂直剧中、文字排版提供了更加简便的写法。
+---
+## 容器属性
+有 6 个属性设置在容器上
+
+- flex-direction => row | row-reverse | column | column-reverse
+- flex-wrap 是否换行 => nowrap | wrap | wrap-reverse
+- flex-flow
+
+flex-flow 属性是 flex-direction 属性和 flex-wrap 属性的简写形式，默认值为 row nowrap。
+
+- justify-content 水平对齐方式 => flex-start | flex-end | center | space-between | space-around
+- align-items 垂直对齐方式 => flex-start | flex-end | center | baseline | stretch
+- align-content 多根轴线的对齐方式 => flex-start | flex-end | center | space-between | space-around | stretch
+
+## 项目属性
+有 6 个
+
+- order 定义项目的排列顺序。数值越小，排列越靠前，默认为 0；
+- flex-grow 放大比例，默认为0，即如果存在剩余空间，也不放大；
+- flex-shrink 缩小比例，默认为1，即如果空间不足，该项目将缩小；
+- flex-basis 项目占据的主轴空间；
+- flex flex 属性是 flex-grow, flex-shrink 和 flex-basis 的简写，默认值为 0 1 auto；
+- align-self 项目有与其他项目不一样的对齐方式。
+
+## 文档
+- https://www.w3.org/TR/css-flexbox-1/
+- https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background
+- https://juejin.im/post/5940bcef61ff4b006cb6b0d5
