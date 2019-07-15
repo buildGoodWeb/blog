@@ -1,0 +1,150 @@
+---
+title: React Typescript 打包方案
+date: 2019-07-15
+tag: Babel, React
+description: 提供 React + Typescript 代码打包的两种方案。
+---
+
+最近用 React + Typescript 写了 SVG 编译成 Inline SVG（React SVG）的应用。通过 `tsc` 命令打包成 `*.js` 文件，然后在外部引用。对打包可用性进行，通过使用以及测试引入验证。
+
+## 使用
+```json
+{
+  "scripts": {
+     "wizard-icons": "git+https://github.com/xxx-icons.git"
+  }
+}
+```
+引入以及测试
+```jsx
+// index.js 文件引用
+import icons from 'xxx-icons';
+// index.test.js UT 测试
+import React from 'react';
+import Icon from './index';
+import { render } from 'enzyme';
+
+describe('Icon', () => {
+  it('should render default ui', () => {
+    const icon = render(<Icon type="xxx-icon"/>);
+    expect(icon).toMatchSnapshot();
+  });
+})
+```
+
+## tsc 命令打包
+打包的代码
+```json
+{
+  "scripts" : {
+    "ts2js": "tsc --p ./lib-tsconfig.json"
+  } 
+}
+```
+`lib-tsconfig.json` 配置
+```json
+{
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "module": "commonjs",
+    "declaration": true,
+    "target": "es5",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "strict": true
+  }
+}
+```
+可以得到 `*.js` 和 `*.d.ts` 文件。打包文件代码
+```js
+// *.js
+"use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = require("react");
+var SvgCycle = function (props) { return (react_1.default.createElement("svg", __assign({ viewBox: "0 0 32 32", width: "1em", height: "1em" }, props),
+    react_1.default.createElement("path", { d: "M12.244 2.922L11.648 1C5.214 2.898.5 8.88.5 15.958c0 4.766 2.16 9.012 5.52 11.874L1.854 32h10V22l-4.412 4.412C4.438 23.92 2.5 20.172 2.5 15.958c0-6.176 4.124-11.394 9.744-13.036zm13.702 1.134L30 0H20v10l4.518-4.518c3.028 2.49 4.982 6.246 4.982 10.478 0 6.25-4.226 11.516-9.952 13.09l.484 1.952c6.596-1.794 11.466-7.848 11.466-15.042.002-4.786-2.17-9.046-5.552-11.904z" }))); };
+exports.default = SvgCycle;
+// *.d.ts
+import React from "react";
+declare const SvgClose: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+export default SvgClose;
+```
+
+## Babel 命令打包
+
+### 安装依赖包
+```bash
+yarn add --dev \
+  @babel/core \
+  @babel/cli \
+  @babel/preset-env \
+  @babel/preset-typescript \
+  typescript
+```
+
+### 配置文件
+`babel.config.js` 配置
+```js
+module.exports = {
+  presets: ['@babel/preset-typescript', '@babel/preset-env']
+}
+```
+
+### 命令
+```json
+{
+  "scripts" : {
+    "babel src --out-dir lib --extensions '.ts,.tsx'",
+  } 
+}
+```
+
+打包代码
+```js
+// *.js
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgClose = function SvgClose(props) {
+  return _react["default"].createElement("svg", _extends({
+    viewBox: "0 0 32 32",
+    width: "1em",
+    height: "1em"
+  }, props), _react["default"].createElement("path", {
+    d: "M30 3.346L28.654 2 16 14.654 3.346 2 2 3.346 14.654 16 2 28.654 3.346 30 16 17.346 28.654 30 30 28.654 17.346 16z"
+  }));
+};
+
+var _default = SvgClose;
+exports["default"] = _default;
+```
+### 注意
+babel 没有打包 `*.d.js` 文件，所以在做 TS 开发时需要声明
+```js
+// global.d.ts
+declare module 'xxx-icons';
+```

@@ -2,4 +2,42 @@
   margin: 0 auto;
   max-width: 48rem;
   padding: 3rem 1.5rem;
+  img {
+    border: 2px dotted #ccc;
+    border-radius: 5px;
+  }
+  @media(min-width: 768px) {
+    table {
+      th, td {
+        padding: 12px 24px;
+      }
+    }
+  }
+
+  @media(max-width: 768px) {
+    body {
+      font-size: 12px;
+    }
+    table {
+      th, td {
+        padding: 8px 4px;
+        word-break: break-all;
+      }
+    }
+  }
+  table {
+    width: 100%;
+    margin: 8px 0 16px;
+    th {
+      color: #5c6b77;
+      font-weight: 500;
+      white-space: nowrap;
+      background: rgba(0,0,0,0.02);
+      border: 1px solid #ebedf0;
+    }
+    td {
+      text-align: left;
+      border: 1px solid #ebedf0;
+    }
+  }
 }
