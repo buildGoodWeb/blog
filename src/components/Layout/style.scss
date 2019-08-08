@@ -2,9 +2,11 @@
   margin: 0 auto;
   max-width: 48rem;
   padding: 3rem 1.5rem;
-  img {
-    border: 2px dotted #ccc;
-    border-radius: 5px;
+  &.post {
+    img {
+      border: 2px dotted #ccc;
+      border-radius: 5px;
+    }
   }
   @media(min-width: 768px) {
     table {
