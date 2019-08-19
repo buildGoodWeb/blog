@@ -11,6 +11,11 @@ class BlogIndex extends React.Component {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMdx.edges
+    const { currentPage, numPages } = this.props.pageContext
+    const isFirst = currentPage === 1
+    const isLast = currentPage === numPages
+    const prevPage = currentPage - 1 === 1 ? '/' : (currentPage - 1).toString()
+    const nextPage = (currentPage + 1).toString()
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -34,6 +39,32 @@ class BlogIndex extends React.Component {
             </div>
           )
         })}
+        <div className="pagination">
+          <div>
+            {!isFirst && (
+              <Link to={prevPage} rel="prev">
+                ← Previous Page
+              </Link>
+            )}
+          </div>
+          <div className="pages">
+            {Array.from({ length: numPages }, (_, i) => (
+              <Link
+                key={i}
+                to={`/${i === 0 ? '' : i + 1}`}
+              >
+                {i + 1}
+              </Link>
+            ))}
+          </div>
+          <div>
+            {!isLast && (
+              <Link to={nextPage} rel="next">
+                Next Page →
+              </Link>
+            )}
+          </div>
+        </div>
       </Layout>
     )
   }
@@ -42,13 +73,17 @@ class BlogIndex extends React.Component {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query blogListQuery($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
       edges {
         node {
           excerpt

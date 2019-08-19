@@ -1,6 +1,26 @@
 ---
 title: 组件开发 --- Grid 栅格
 date: 2019-03-11
-tag: Components
+tags: Components
 description: 栅格化系统，基于`行（row）`和`列（col）`布局外部框架，同时将整体区域按照 24 等分的原则进行划分。
 ---
+
+## 使用 Bootstrap
+[使用 Bootstrap 构建 24 栅格系统](https://xsky-fe.github.io/wizard-ui/components/badge/)
+
+1. 添加 bootstrap sass 依赖
+```bash
+yarn add bootstrap-sass
+```
+2. 添加两个文件 `bootstrap.scss`、`bootstrap-custom.scss`,并引入 bootstrap 默认样式
+```
+@import 'bootstrap-custom';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap';
+```
+3. 调整 `bootstrap-custom` 配置栅格。24 栅格，间隔 16px。
+```
+//** Number of columns in the grid.
+$grid-columns:              24 !default;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         16px !default;
+``` 

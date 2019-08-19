@@ -1,3 +1,7 @@
+body, html {
+  font-size: 13px;
+  font-family: "Helvetica Neue","Helvetica","PingFang SC","Arial","Microsoft YaHei","微软雅黑";
+}
 .pre {
   border-radius: 4px;
   margin-bottom: 10px;
@@ -62,11 +66,29 @@ h3 {
   }
 }
 .all-header {
+  margin-bottom: 30px;
   h3 {
     span {
       font-size: 13px;
       padding-left: 10px;
       color: #bbb;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ebedf0;
+  padding: 20px 0;
+  .pages a {
+    border: 1px solid #ebedf0;
+    border-radius: 3px;
+    padding: 5px 12px;
+    margin: 0 5px;
+    &[aria-current="page"] {
+      color: rgb(255, 255, 255);
+      background: rgb(0, 122, 204);
     }
   }
 }
