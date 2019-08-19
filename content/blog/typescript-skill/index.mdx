@@ -1,0 +1,79 @@
+---
+title: Typescript 小技巧
+date: 2019-08-19
+tag: Typescript
+description: 收集 Typescript 使用小技巧。
+---
+
+## 对象索引签名(Index signature)
+```js
+const VERSIONS = {
+  v1: 'V1',
+  v2: 'V2',
+}
+```
+使用 `typeof` 拿到类型定义
+```Typescript
+type VERSIONSType = typeof VERSIONS;
+```
+对象进行轮询操作：
+```js
+Object.keys(VERSIONS).map(v => ({
+  value: v,
+  title: VERSIONS[v]
+}))
+// Throw Error
+// => No index signature with a parameter
+```
+### 误区
+定义一个 `indexSignature`
+```js
+export interface IndexSignature {
+  [key: string]: any;
+}
+```
+然后添加类型访问
+```js
+Object.keys(VERSIONS).map(v => ({
+  value: v,
+  title: (VERSIONS as IndexSignature)[v]
+}))
+```
+索引将类型定义为 `any`，后导致后续无法进行类型推断检查，如果给对象每个 `key` 定义类型，右难以拓展维护（新 `key` 加入需要同步更改）
+### 正解
+`keyof` 拿到对象所有 `key` 的 `union` 类型。
+```Typescript
+type VERSIONSKey = keyof typeof VERSIONS;
+(Object.keys(VERSIONS) as VERSIONSKey[]).map(v => ({
+  value: v,
+  title: VERSIONS[v]
+}))
+```
+
+### 实例
+```tsx
+() => {
+  const VERSIONS = {
+    v1: 'V1',
+    v2: 'V2',
+  }
+  interface IndexSignature {
+    [key: string]: any;
+  }
+  type VERSIONSKey = keyof typeof VERSIONS;
+  return (
+    <>
+      <div>Bad</div>
+      {Object.keys(VERSIONS).map(v => ({
+        value: v,
+        title: (VERSIONS as IndexSignature)[v]
+      }))}
+      <div>Good</div>
+      (Object.keys(VERSIONS) as VERSIONSKey[]).map(v => ({
+        value: v,
+        title: VERSIONS[v]
+      }))
+    </>
+  )
+}
+```

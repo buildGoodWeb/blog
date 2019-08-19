@@ -18,10 +18,12 @@ function Bio() {
         const { author } = data.site.siteMetadata
         return (
           <div className="bio">
-            <Image
-              fixed={data.avatar.childImageSharp.fixed}
-              alt={author}
-            />
+            <a target="_blank" rel="noopener noreferrer"  href="https://github.com/wangkailang">
+              <Image
+                fixed={data.avatar.childImageSharp.fixed}
+                alt={author}
+              />
+            </a>
           </div>
         )
       }}
