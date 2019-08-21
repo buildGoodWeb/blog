@@ -1,0 +1,27 @@
+---
+title: Typescript use in React
+date: 2019-08-20
+tag: Typescript, React
+description: 收集 React 使用 Typescript 技巧。
+---
+
+## Refs
+```tsx
+class App extends React.Component<AppProps, AppState> {
+  private InputRef = React.RefObject<HTMLInputElement>;
+  constructor(props) {
+    super(props);
+    this.InputRef = React.createRef();
+  }
+  render() {
+    return <input type="text" ref={this.InputRef} />;
+  }
+}
+```
+### Hooks
+```tsx
+const App = (props: AppProps) => {
+  const InputRef = React.useRef<HTMLDivElement>(null);
+  return <input type="text" ref={this.InputRef} />;
+}
+```
