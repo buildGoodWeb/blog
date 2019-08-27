@@ -1,8 +1,14 @@
 .layout {
   margin: 0 auto;
-  max-width: 48rem;
+  max-width: 56rem;
   padding: 3rem 1.5rem;
+  background-color: #fff;
   &.post {
+    ul {
+      li {
+        line-height: 1.75;
+      }
+    }
     img {
       border: 2px dotted #ccc;
       border-radius: 5px;

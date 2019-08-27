@@ -4,6 +4,7 @@ import './style.scss';
 function Toc({ headings, location }) {
   return (
     <div className="main-toc row">
+      <div>目录</div>
       {headings.map(({ depth, value }, idx) => {
         const key = encodeURIComponent(value);
         const isCurrent = location.hash && location.hash.includes(key);

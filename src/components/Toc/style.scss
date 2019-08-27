@@ -1,13 +1,14 @@
 .main-toc {
   position: fixed;
-  right: 3rem;
-  top: 2rem;
-  width: inherit;
+  right: 0.5rem;
+  top: 4rem;
   margin-top: 25px;
-  padding-left: 20px;
-  border-left: 1px solid #ececec;
+  padding-left: 15px;
   & > div {
     line-height: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &--li {
     &2 {
@@ -25,6 +26,11 @@
     &:hover {
       color: #337ab7;
     }
+  }
+}
+@media(min-width: 900px) {
+  .main-toc {
+    width: 12rem;
   }
 }
 @media(max-width: 900px) {
