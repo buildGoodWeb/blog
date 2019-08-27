@@ -1,0 +1,22 @@
+---
+title: Virtual List By React
+date: 2019-08-22
+tag: React, Component
+description: Virtual List By React
+---
+
+## react-virtualized [源码](https://github.com/bvaughn/react-virtualized/blob/master/source/List/List.js)
+
+## 注释翻译
+1. It is inefficient to create and manage a large list of DOM elements within a scrolling container if only a few of those elements are visible. 
+The primary purpose of this component is to improve performance by only rendering the DOM nodes that a user is able to see based on their current scroll position. 
+This component renders a virtualized list of elements with either fixed or dynamic heights.
+
+少数元素可见，在滚动过程中创建并管理大量 `DOM` 元素会影响效率（inefficient）。组件目的在于用户能够根据当前滚动位置查看 `DOM` 节点
+
+## 流程
+onScroll 滚动监听
+=>
+计算确定 data 中需要渲染数据的起始、结束位置
+attachItems 渲染元素
+rowRenderer 

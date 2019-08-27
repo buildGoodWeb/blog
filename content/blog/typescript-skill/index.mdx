@@ -13,8 +13,13 @@ const VERSIONS = {
 }
 ```
 使用 `typeof` 拿到类型定义
-```Typescript
+```ts
 type VERSIONSType = typeof VERSIONS;
+// 等价
+type VERSIONSType = {
+  v1: string
+  v2: string
+}
 ```
 对象进行轮询操作：
 ```js
@@ -42,7 +47,7 @@ Object.keys(VERSIONS).map(v => ({
 索引将类型定义为 `any`，后导致后续无法进行类型推断检查，如果给对象每个 `key` 定义类型，右难以拓展维护（新 `key` 加入需要同步更改）
 ### 正解
 `keyof` 拿到对象所有 `key` 的 `union` 类型。
-```Typescript
+```ts
 type VERSIONSKey = keyof typeof VERSIONS;
 (Object.keys(VERSIONS) as VERSIONSKey[]).map(v => ({
   value: v,
@@ -76,4 +81,54 @@ type VERSIONSKey = keyof typeof VERSIONS;
     </>
   )
 }
+```
+
+## 复合类型转换
+Typescript 的复合类型分为两类，**set** 和 **map**。
+- set 无序的、无重复元素的集合
+- map 没有重复的键值对
+```ts
+// set
+type Size = 'sm' | 'md' | 'lg';
+// map
+interface Ob {
+  a: string
+  b: number
+}
+```
+### 转换
+```ts
+type ObKeys = keyof Ob; // 'a' | 'b'
+type ObVals = Ob[keyof Ob] // string | number
+
+type SizeMap = {
+  [k in Size]: number
+}
+// 等价
+type SizeMap = {
+  sm: number
+  md: number
+  lg: number
+}
+```
+## 常用工具
+### set 转 map `Record<Set, type>`
+```ts
+type Record<K extends keyof any, T> = { [P in K]: T };
+type Size = 'sm' | 'md' | 'lg';
+type SizeMap = Record<Size, number>
+// type SizeMap = {
+//   sm: number
+//   md: number
+//   lg: number
+// }
+```
+### 选 map 部分 `Pick<Map, Size>`
+```ts
+type Pick<T, K extends keyof T> = { [P in K]: T[P] };
+type PickSizeMap = Pick<SizeMap, 'sm' | 'md'>;
+// type SizeMap = {
+//   sm: number
+//   md: number
+// }
 ```
