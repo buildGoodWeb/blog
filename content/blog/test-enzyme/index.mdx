@@ -1,0 +1,71 @@
+---
+title: Enzyme test react components
+date: 2019-08-28
+tag: React, Test
+description: 受用 Enzyme 测试 React 组件
+---
+
+## [debug](https://airbnb.io/enzyme/docs/api/ShallowWrapper/debug.html)
+可以打印出 HTML 格式的字符串用来定位、追踪测试问题。
+### 参数
+- `ignoreProps` 默认为 `true`，是否在打印中去掉 `props` 相关的字符串。对于复杂测试可以简化打印，快速定位问题。
+- `verbose` 默认为 `false`，是否打印中详细展开数组和对象。
+### 实例
+```tsx
+import React from 'react';
+import { shallow } from 'enzyme';
+
+type PageProps = {
+  object: {
+    index: number,
+    text: string
+  }
+}
+type BookProps = {
+  title: string
+}
+const Page = (props: PageProps) => (
+  <div>Page is {props.object.index}, text is {props.object.text}</div>
+)
+const Book = (props: BookProps) => (
+  <div title={props.title}>
+    <h3>{props.title}</h3>
+    <Page object={{ index: 1, text: 'Hello world!' }}/>
+  </div>
+);
+
+const wrapper = shallow(<Book title="Huckleberry Finn" />);
+```
+直接打印结果：
+```jsx
+console.log(wrapper.debug());
+{/* result */}
+<div title="Huckleberry Finn">
+  <h3>
+    Huckleberry Finn
+  </h3>
+  <Page object={{...}} />
+</div>
+```
+`ignoreProps` 设置为 `true` 打印结果:
+```jsx
+console.log(wrapper.debug({ ignoreProps: true }));
+{/* result */}
+<div>
+  <h3>
+    Huckleberry Finn
+  </h3>
+  <Page />
+</div>
+```
+`verbose` 设置为 `true` 打印结构
+```jsx
+console.log(wrapper.debug({ verbose: true }));
+{/* result */}
+<div title="Huckleberry Finn">
+  <h3>
+    Huckleberry Finn
+  </h3>
+  <Page object={{ index: 1, text: 'Hello world!' }} />
+</div>
+```
