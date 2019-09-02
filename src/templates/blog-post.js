@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import JustComments from 'gatsby-plugin-just-comments'
 
 import Layout from "../components/Layout"
 import playground from "../components/Playground"
@@ -50,6 +51,12 @@ class BlogPostTemplate extends React.Component {
             </Link>
           )}
         </div>
+        <JustComments
+          locale="zh_CN"
+          apikey="6b7be982-a2b1-4c37-ac0b-be44f6c9e483"
+          disablesociallogin
+          disableprofilepictures
+        />
       </Layout>
     )
   }
