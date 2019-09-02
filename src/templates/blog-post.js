@@ -1,14 +1,14 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
-import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import { MDXProvider } from '@mdx-js/react'
+import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 import JustComments from 'gatsby-plugin-just-comments'
 
-import Layout from "../components/Layout"
-import playground from "../components/Playground"
-import LinkedHeading from "../components/LinkedHeading"
-import Toc from "../components/Toc"
-import SEO from "../components/seo"
+import Layout from '../components/Layout'
+import playground from '../components/Playground'
+import LinkedHeading from '../components/LinkedHeading'
+import Toc from '../components/Toc'
+import SEO from '../components/seo'
 
 const components = {
   h2: props => <LinkedHeading h="2" {...props} />,
