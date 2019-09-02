@@ -1,12 +1,12 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { MDXProvider } from '@mdx-js/react';
+import { MDXProvider } from "@mdx-js/react"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
 
 import Layout from "../components/Layout"
-import playground from '../components/Playground';
-import LinkedHeading from '../components/LinkedHeading'
-import Toc from '../components/Toc'
+import playground from "../components/Playground"
+import LinkedHeading from "../components/LinkedHeading"
+import Toc from "../components/Toc"
 import SEO from "../components/seo"
 
 const components = {
@@ -15,7 +15,7 @@ const components = {
   h4: props => <LinkedHeading h="4" {...props} />,
   code: playground,
   pre: props => <div className="pre" {...props} />,
-};
+}
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -34,7 +34,7 @@ class BlogPostTemplate extends React.Component {
           {post.frontmatter.title}
           <span>{post.frontmatter.date}</span>
         </h1>
-        <Toc headings={headings} location={this.props.location}/>
+        <Toc headings={headings} location={this.props.location} />
         <MDXProvider components={components}>
           <MDXRenderer>{post.code.body}</MDXRenderer>
         </MDXProvider>
