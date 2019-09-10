@@ -1,0 +1,42 @@
+---
+title:  ES6 Set And Map Use in Typescript
+date: 2019-09-09
+tag: 
+description: ES6 中 Set 和 Map 介绍以及在 Typescript 的应用
+---
+
+## Map
+### 对比
+- 对象只能用`字符串`作为键值，即`字符串-值`，导致其使用有局限。
+```js
+const obj = { a: 1 };
+const data = {};
+data[obj] = test;
+Object.keys(data) // => ["[object Object]"]
+```
+- ES6 的 Map 做了扩充，支持`值-值`
+```js
+const obj = { a: 1 };
+const data = {};
+const m = new Map();
+m.set(obj, 'test')
+m.has(obj) // => true
+```
+### Typscript 中使用
+定义 Map 类型
+```Typescript
+interface Map<K, V> {
+  clear(): void;
+  delete(key: K): boolean;
+  entries(): IterableIterator<[K, V]>;
+  forEach(callbackfn: (value: V, index: K, map: Map<K, V>) => void, thisArg?: any): void;
+  get(key: K): V;
+  has(key: K): boolean;
+  keys(): IterableIterator<K>;
+  set(key: K, value?: V): Map<K, V>;
+  size: number;
+  values(): IterableIterator<V>;
+  [Symbol.iterator](): IterableIterator<[K, V]>;
+  [Symbol.toStringTag]: string;
+}
+```
