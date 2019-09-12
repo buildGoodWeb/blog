@@ -1,0 +1,121 @@
+---
+title: Typescript Type
+date: 2019-09-12
+tag: Typescript
+description: Typescript ES2015 类型
+---
+
+梳理 `Typescript` 的类型使用。
+
+## 使用
+[Typescript ECMAScript APIs](https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts) 的定义。
+
+## 转换
+
+### Partial 全部指定为可选类型
+#### 示例
+```Typescript
+type Foo = {
+	a: number;
+	b: string;
+	c: boolean;
+};
+
+type FooPartial = Partial<Foo>;
+//=> { a?: number; b?: string; c?: boolean }
+```
+#### 实现
+```Typescript
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+```
+
+## 过滤
+### Pick 选取指定的类型
+#### 示例
+```Typescript
+type Foo = {
+	a: number;
+	b: string;
+	c: boolean;
+};
+
+type FooWithAC = Pick<Foo, 'a' | 'c'>;
+//=> { a: number; c: boolean };
+```
+#### 实现
+```Typescript
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+```
+
+### Omit 去掉指定的类型。
+#### 示例
+```Typescript
+type Foo = {
+	a: number;
+	b: string;
+	c: boolean;
+};
+type FooWithoutA = Omit<Foo, 'a' | 'c'>;
+//=> { b: string };
+```
+#### 实现代码
+
+```Typescript
+type Except<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+```
+
+### Record
+### 示例
+```Typescript
+type Foo = {
+	a: number;
+	b: string;
+	c: boolean;
+};
+type FooRecordWithString = Record<string, Foo>
+//=> { [x: string]: Fo }
+```
+#### 实现
+```Typescript
+type Record<K extends keyof any, T> = {
+    [P in K]: T;
+}
+```
+
+### Exclude 排除可分配的类型
+#### 示例
+```Typescript
+type Foo = {
+	a: number;
+	b: string;
+	c: boolean;
+};
+
+type FooKey = keyof Foo; //=> "a" | "b" | "c"
+type FooKeyWithoutAC = Exclude<KeyOf, 'a' | 'c'> //=> "b"
+```
+#### 实现
+```Typescript
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+### Extract 选择可分配的类型
+#### 示例
+```Typescript
+type Foo = {
+	a: number;
+	b: string;
+	c: boolean;
+};
+
+type FooKey = keyof Foo; //=> "a" | "b" | "c"
+type FooKeyWithAC = Extract<KeyOf, 'a' | 'c'> //=> "a" | "c"
+```
+#### 实现
+```Typescript
+type Extract<T, U> = T extends U ? T ： never;
+```

@@ -5,6 +5,9 @@ tag:
 description: ES6 中 Set 和 Map 介绍以及在 Typescript 的应用
 ---
 
+Typescript 不支持 ES6 中的 Set 和 Map 方法，Github 上有[相关的讨论](https://github.com/Microsoft/TypeScript/issues/3069)。建议使用第三方库支持，
+比如 [es6Collection](https://github.com/WebReflection/es6-collections), [es6-shims](https://github.com/es-shims/es6-shim), [core-js](https://github.com/zloirock/core-js) 等。
+
 ## Map
 ### 对比
 - 对象只能用`字符串`作为键值，即`字符串-值`，导致其使用有局限。
@@ -39,4 +42,30 @@ interface Map<K, V> {
   [Symbol.iterator](): IterableIterator<[K, V]>;
   [Symbol.toStringTag]: string;
 }
+```
+
+## Set
+### Typscript 中使用
+定义 Set 类型
+```Typescript
+interface Set<T> {
+  add(value: T): Set<T>;
+  clear(): void;
+  delete(value: T): boolean;
+  entries(): IterableIterator<[T, T]>;
+  forEach(callbackfn: (value: T, index: T, set: Set<T>) => void, thisArg?: any): void;
+  has(value: T): boolean;
+  keys(): IterableIterator<T>;
+  size: number;
+  values(): IterableIterator<T>;
+  [Symbol.iterator]():IterableIterator<T>;
+  [Symbol.toStringTag]: string;
+}
+
+interface SetConstructor {
+  new <T>(): Set<T>;
+  new <T>(iterable: Iterable<T>): Set<T>;
+  prototype: Set<any>;
+}
+declare var Set: SetConstructor;
 ```
