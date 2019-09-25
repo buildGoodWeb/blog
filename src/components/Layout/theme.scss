@@ -1,12 +1,3 @@
----
-title:  custom theme with sass
-date: 2019-09-25
-tag: 
-description: 使用 sass 自定义主题
----
-
-## 定义主题 `theme.scss`:
-```scss
 $themes: (
   light: (
     bd-bg: #f4f5f5,
@@ -34,26 +25,3 @@ $themes: (
 @function themed($key) {
   @return map-get($theme-map, $key);
 }
-```
-
-## 引用
-```scss
-@import 'xx/theme.scss';
-.Topbar {
-	@include themify($themes) {
-		color: themed('text-color');
-	}
-}
-```
-相当于
-```scss
-.theme-light .Topbar {
-	color: #555;
-}
-.theme-dark .Topbar {
-	color: #fff;
-}
-```
-
-## 工具使用
-- [sass to css](https://www.sassmeister.com/)

@@ -1,8 +1,41 @@
+@import './theme.scss';
+
+.theme-light {
+  background-color: #f4f5f5
+}
+
+.theme-dark {
+  background-color: #181818;
+}
+
+svg {
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  pointer-events: none;
+}
+
 .layout {
   margin: 0 auto;
   max-width: 56rem;
   padding: 3rem 1.5rem;
-  background-color: #fff;
+  @include themify($themes) {
+    color: themed('text-color');
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .toggle {
+    line-height: 1;
+    display: inline-block;
+    cursor: pointer;
+    &:hover {
+      color: #0078e7;
+    }
+  }
   &.post {
     ul {
       li {

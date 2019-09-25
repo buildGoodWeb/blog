@@ -1,3 +1,5 @@
+@import '../Layout/theme.scss';
+
 .main-toc {
   position: fixed;
   right: 0.5rem;
@@ -24,7 +26,9 @@
     }
   }
   a {
-    color: #777;
+    @include themify($themes) {
+      color: themed('text-color');
+    }
     text-decoration: none;
     &.current,
     &:hover {
