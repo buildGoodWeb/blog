@@ -1,6 +1,6 @@
 # docs: https://help.github.com/en/articles/workflow-syntax-for-github-actions
 
-name: Deploy Storybook
+name: Deploy to gh-pages
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Build and Deploy Storybook
+    - name: Build and Deploy to gh-pages
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
