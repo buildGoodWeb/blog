@@ -1,0 +1,66 @@
+---
+title: 数据 mock
+date: 2019-10-17
+tag: mock
+description: 模拟多种数据类型。
+---
+
+## 工具
+- [fakerjs](https://github.com/Marak/Faker.js)
+- [mockjs](https://github.com/nuysoft/mock)
+
+## fakerjs
+- 支持多语言
+- 生成各种特定的数据类型, 比如`地址、公司、数据库、日期、金融、图片、名称、单词、语句、数字、电话号码、uuid`等相关的数据。
+
+### 使用
+```js
+const faker = require('faker');
+// 在数组中随机选择一个
+faker.random.arrayElement(['a', 'b', 'c']);
+// 名称
+faker.name.findName();
+// uuid
+faker.random.uuid();
+// 图片链接
+faker.image.imageUrl();
+```
+
+## mockjs
+- 生成各种特定的数据类型
+- 支持批量，比如在数据或者对象中选择多个数据
+- 使用 `@` 做为占位符
+
+### 使用
+```js
+const mock = require('mockjs');
+mock.Random.name();
+mock.Random.word();
+mock.Random.datetime();
+const STATUS = [
+  'default',
+  'success',
+  'info',
+  'critical',
+  'warning',
+  'danger',
+];
+const CITY = {
+  '310000': '上海市',
+  '320000': '江苏省',
+  '330000': '浙江省',
+  '340000': '安徽省'
+}
+
+mock.mock({
+  'list|8': [{ // 数组中包含 8 个元素
+    'id|+1': 1, // id 依次加 1
+    name: '@name',
+    description: '@word',
+    'status|1': STATUS, // 数字中选择一个字符串
+    'city|2' CITY, // 对象中选择两个键值对
+    'action_status|1': STATUS,
+    update_time: '@datetime'
+  }]
+});
+```

@@ -1,8 +1,7 @@
 {
   "name": "kailang-blog",
-  "private": true,
   "description": "Blog record interesting things.",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": "kailang <wkl2418904055@163.com>",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
@@ -15,37 +14,24 @@
     "d3-selection": "^1.4.0",
     "gatsby": "^2.8.2",
     "gatsby-image": "^2.1.2",
-    "gatsby-mdx": "^0.6.3",
     "gatsby-plugin-google-analytics": "^2.0.20",
     "gatsby-plugin-manifest": "^2.1.1",
+    "gatsby-plugin-mdx": "^1.0.24",
     "gatsby-plugin-offline": "^2.1.1",
     "gatsby-plugin-react-helmet": "^3.0.12",
     "gatsby-plugin-sass": "^2.0.11",
     "gatsby-plugin-sharp": "^2.1.3",
-    "gatsby-plugin-typescript": "^2.0.15",
-    "gatsby-remark-copy-linked-files": "^2.0.13",
     "gatsby-remark-images": "^3.0.14",
-    "gatsby-remark-prismjs": "^3.2.9",
-    "gatsby-remark-responsive-iframe": "^2.1.1",
-    "gatsby-remark-smartypants": "^2.0.9",
     "gatsby-source-filesystem": "^2.0.38",
-    "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.21",
     "node-sass": "^4.12.0",
-    "prismjs": "^1.16.0",
     "purecss": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
-    "react-live": "^2.1.2",
-    "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.54"
+    "react-live": "^2.1.2"
   },
   "devDependencies": {
-    "@types/node": "^12.0.4",
-    "@types/react": "^16.8.19",
-    "@types/react-dom": "^16.8.4",
-    "gatsby-plugin-just-comments": "^0.2.3",
     "gh-pages": "^2.0.1",
     "prettier": "^1.17.1"
   },
@@ -64,7 +50,7 @@
     "start": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "serve": "gatsby serve",
-    "deploy": "rm -rf public && gatsby build --prefix-paths && yarn docs",
+    "deploy": "rm -rf public && rm -rf .cache && gatsby build --prefix-paths && yarn docs",
     "docs": "gh-pages -d public"
   }
 }

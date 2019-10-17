@@ -1,7 +1,7 @@
 ---
-title: AWS S3 Console
+title: AWS S3 Console 使用体验
 date: 2019-04-08
-tags: S3
+tags: Cloud
 description: 调研 AWS S3 Console
 ---
 
@@ -38,7 +38,9 @@ aws --version
 4. 权限选择：`AdministratorAccess`
 5. 输入角色名称 `kailang-demon-20190404`， 记录下名称，后面会用到
 6. 进入创建角色的详情 => 信任关系，选择“编辑信任关系”，得到下面的“权限策略”
+
 ![aws s3 cosnole iam setting](iam-set-json.png)
+
 7. 配置命令
 ```bash
 # 创建一个 IAM 角色
@@ -50,7 +52,9 @@ aws iam create-instance-profile --instance-profile-name kailang-demon-20190404-p
 # IAM 角色附加到实例配置文件
 aws iam add-role-to-instance-profile --role-name kailang-demon-20190404-role --instance-profile-name kailang-demon-20190404-pro
 ```
+
 ![aws s3 cosnole iam create role](iam-create-role.png)
+
 ![aws s3 cosnole iam profile](iam-instance.png)
 
 ## 参考

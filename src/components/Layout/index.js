@@ -1,13 +1,25 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import './style.scss';
 import Toggle from '../Toggle';
 
 const isClient = typeof window === 'object';
 
 const Layout = props => {
-  const { location, title, children, isPost } = props;
-  const rootPath = `${__PATH_PREFIX__}/`
+  const { location, children, isPost } = props;
+  const rootPath = `${__PATH_PREFIX__}/`;
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `
+  );
+  const title = site.siteMetadata.title;
   let header
 
   const [cls, setCls] = React.useState(() => {

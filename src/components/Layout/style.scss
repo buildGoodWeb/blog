@@ -1,11 +1,15 @@
 @import './theme.scss';
 
 .theme-light {
-  background-color: #f4f5f5
+  background-color: #f4f5f5;
+  transition: 0.5s;
+  min-height: 100vh;
 }
 
 .theme-dark {
   background-color: #181818;
+  transition: 0.5s;
+  min-height: 100vh;
 }
 
 svg {
@@ -45,6 +49,8 @@ svg {
     img {
       border: 2px dotted #ccc;
       border-radius: 5px;
+      position: absolute;
+      top: 0;
     }
   }
   @media(min-width: 768px) {

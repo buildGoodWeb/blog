@@ -49,7 +49,7 @@ exports.createPages = ({ graphql, actions }) => {
     });
 
     // Create blog-list pages
-    const blogListPost = path.resolve (`./src/templates/blog-list-template.js`);
+    const blogListPost = path.resolve(`./src/templates/blog-list-template.js`);
     const postsPerPage = 10;
     const numPages = Math.ceil(posts.length / postsPerPage)
     Array.from({ length: numPages }).forEach((_, i) => {

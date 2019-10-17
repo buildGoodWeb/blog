@@ -1,14 +1,13 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
-import { MDXProvider } from '@mdx-js/react'
-import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-import JustComments from 'gatsby-plugin-just-comments'
+import React from 'react';
+import { Link, graphql } from 'gatsby';
+import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import Layout from '../components/Layout'
-import playground from '../components/Playground'
-import LinkedHeading from '../components/LinkedHeading'
-import Toc from '../components/Toc'
-import SEO from '../components/seo'
+import Layout from '../components/Layout';
+import playground from '../components/Playground';
+import LinkedHeading from '../components/LinkedHeading';
+import Toc from '../components/Toc';
+import SEO from '../components/seo';
 
 const components = {
   h2: props => <LinkedHeading h="2" {...props} />,
@@ -16,17 +15,16 @@ const components = {
   h4: props => <LinkedHeading h="4" {...props} />,
   code: playground,
   pre: props => <div className="pre" {...props} />,
-}
+};
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.mdx
-    const { headings = [] } = post || {}
-    const siteTitle = this.props.data.site.siteMetadata.title
-    const { previous, next } = this.props.pageContext
+    const post = this.props.data.mdx;
+    const { headings = [] } = post || {};
+    const { previous, next } = this.props.pageContext;
 
     return (
-      <Layout isPost location={this.props.location} title={siteTitle}>
+      <Layout isPost location={this.props.location}>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
@@ -37,7 +35,7 @@ class BlogPostTemplate extends React.Component {
         </h1>
         <Toc headings={headings} location={this.props.location} />
         <MDXProvider components={components}>
-          <MDXRenderer>{post.code.body}</MDXRenderer>
+          <MDXRenderer>{post.body}</MDXRenderer>
         </MDXProvider>
         <div className="prev-next-nav">
           {previous && (
@@ -51,42 +49,28 @@ class BlogPostTemplate extends React.Component {
             </Link>
           )}
         </div>
-        <JustComments
-          locale="zh_CN"
-          apikey="6b7be982-a2b1-4c37-ac0b-be44f6c9e483"
-          disablesociallogin
-          disableprofilepictures
-        />
       </Layout>
-    )
+    );
   }
 }
 
-export default BlogPostTemplate
+export default BlogPostTemplate;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      code {
-        body
-      }
+      body
       headings {
         value
         depth
       }
       frontmatter {
         title
-        date
+        date(formatString: "YYYY-MM-DD")
         description
       }
     }
   }
-`
+`;
