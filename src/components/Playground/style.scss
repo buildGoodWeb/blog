@@ -3,6 +3,7 @@ $code-color: #fff;
 $code-error-bg: #f24542;
 
 .playground {
+  font-size: 13px;
   &.show {
     background-color: $code-bg;
   }

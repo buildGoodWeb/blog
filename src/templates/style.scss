@@ -17,6 +17,18 @@ code {
   color: #e83e8c;
   word-break: break-word;
 }
+details {
+  margin: 15px 0;
+  cursor: pointer;
+  summary:hover {
+    color: #337ab7;
+    outline: none;
+  }
+  summary:focus {
+    color: #337ab7;
+    outline: none;
+  }
+}
 .post {
   h2:before,
   h3:before {
