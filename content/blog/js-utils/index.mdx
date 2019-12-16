@@ -1,0 +1,23 @@
+---
+title: Javascript 方法
+date: 2019-11-15
+tag: Javascript
+description: 整理 Javascript 原生方法
+---
+
+## 数组
+
+### 数组克隆 clone
+
+```Javascript
+const arr = [1, 2, 3];
+// 使用 slice
+const sliceArr = arr.slice();
+// 使用 concat
+const concatArr = [].concat(arr);
+// Object.assign
+let assignArr = [];
+Obejct.assign(assignArr, arr);
+// 扩展运算符
+const newArr = [...arr];
+```
