@@ -1,0 +1,23 @@
+---
+title:  rpm build 打包
+date: 2020-02-05
+tag: linux
+description: 如何将源代码通过 rpm build 打包
+---
+
+## RPM 打包的优势
+
+`RPM` 是运行在 `Redhat` `CentOS` 和 `Fedora` 上的包管理系统。RPM 帮助你更简单的分发，管理和更新软件。
+
+- 安装、重装、移除、更新和验证包提供规范化的工具。
+- 
+
+## 安装基础依赖
+
+```build
+yum install gcc rpm-build rpm-devel rpmlint make python bash coreutils diffutils patch rpmdevtools
+```
+
+## 参考文旦
+- [RPM Packaging Guide](https://rpm-packaging-guide.github.io/#packaging-software)
+
