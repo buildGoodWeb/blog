@@ -1,0 +1,34 @@
+---
+title: 表单验证：支持 IPV4、IPV6 带掩码
+date: 2020-04-30
+tags: SCHAME
+description: 表单验证字符串支持 IPV4 或者 IPV6，并支持带掩码后缀
+---
+
+## 字符串举例
+
+```bash
+# ipv4
+10.255.101.19
+# ipv4 with subnet
+10.255.101.19/24
+# invalid ipv4 with subnet
+10.255.101.19/33
+# ipv6
+2408:8720:2000:10be:0:0:f:1
+# ipv6 with subnet
+2408:8720:2000:10be:0:0:f:1/64
+# invalid ipv6 with subnet
+2408:8720:2000:10be:0:0:f:1/129
+```
+
+## 封装函数
+
+- is-ip 验证字符串 ipv4 或者 ipv6 格式
+- is-cidr 验证字符串 ipv4/subnet 或者 ipv6/subnet 格式
+
+```js
+var isCidr = require('is-cidr')
+var isIp = require('is-ip')
+const isIpOrSubnet = vip => isIp(vip) || isCidr(vip);
+```
