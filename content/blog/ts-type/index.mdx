@@ -31,6 +31,33 @@ type Partial<T> = {
 };
 ```
 
+### 部分指定为可选类型
+#### 实现
+`Omit 去掉指定字段联合 Pick 出指定字段设置为可选`
+```Typescript
+type WithOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+```
+#### 示例
+将 name、endpoint 标记为可选
+```Typescript
+type AccountFormType = {
+  name: string,
+  endpoint: string,
+  accessKey: string,
+  secretKey: string,
+  region?: string,
+}
+type AccountFormOptionalType = WithOptional<AccountFormType, 'name' | 'endpoint'>
+// => 
+// {
+//   name?: string;
+//   accessKey?: string
+//   secretKey: string
+//   endpoint: string
+//   region?: string
+// }
+```
+
 ## 过滤
 ### Pick 选取指定的类型
 #### 示例
