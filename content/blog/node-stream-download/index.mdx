@@ -53,7 +53,7 @@ function streamRecursive(fFiles, wStream) {
     return wStream.end();
   }
 
-  const curPath = fragmentFiles.shift();
+  const curPath = fFiles.shift();
   const curFile = path.resolve(__dirname, curPath);
   const curReadStream = fs.createReadStream(curFile);
 
@@ -66,7 +66,7 @@ function streamRecursive(fFiles, wStream) {
   curReadStream.on('error', err => {
     console.error('error:', err);
     wStream.close();
-  })
+  });
 }
 ```
 
