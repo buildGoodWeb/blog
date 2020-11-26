@@ -1,0 +1,36 @@
+---
+title: Django 构建博客
+date: 2020-11-16
+tags: python,django
+description: 通过 Django 构建博客。
+---
+
+## 环境
+
+- python3、pip3
+- pipenv
+
+## 安装以来
+
+```bash
+# Install pipenv
+python3 -m pip install pipenv
+# Add PATH（临时生效）
+export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.9/bin
+# Or (需要重启)
+sudo vim /etc/paths
+pipenv --version
+# Output: pipenv, version 2020.11.15
+```
+
+## 项目初始化
+
+```bash
+mkdir django_pipenv_project
+
+# 生成Pipfile和Pipfile.lock，创建虚拟环境，自动生成一个随机的虚拟环境目录名
+pipenv install
+
+# 激活虚拟环境
+pipenv shell
+```
