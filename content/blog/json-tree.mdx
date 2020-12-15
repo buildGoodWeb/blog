@@ -1,0 +1,66 @@
+---
+title: 树形结构与扁平结构相互转换
+date: 2020-12-15
+tags: Javascript
+description: 树形结构与扁平结构相互转换
+---
+
+## 扁平数据转树结构
+
+```Javascript
+/**
+ * const arr = [
+ *  { id: 2, name: 'B', pid: 0 },
+ *  { id: 3, name: 'C', pid: 1 },
+ *  { id: 1, name: 'A', pid: 2 },
+ *  { id: 4, name: 'D', pid: 1 },
+ *  { id: 5, name: 'E', pid: 2 },
+ *  { id: 6, name: 'F', pid: 3 },
+ *  { id: 7, name: 'G', pid: 2 },
+ *  { id: 8, name: 'H', pid: 4 },
+ *  { id: 9, name: 'I', pid: 0 }
+ * ];
+*
+* */
+function toTree(list) {
+  let result = [];
+  // 将数组转成对象形式
+  const obj = list.reduce((res, v) => {
+    res[v.id] = v;
+    return res;
+  }, {});
+  list.forEach(l => {
+    let parent = obj[l.pid];
+    if (parent) {
+      if (!parent.children) { parent.children = [] }
+      parent.children.push(l);
+    } else {
+      result.push(l);
+    }
+  })
+  return result;
+}
+
+toTree(arr);
+// 结果：
+//
+//     9     7    3 -- 6
+//    /     /    /
+//   0 -- 2 -- 1 -- 4 -- 8
+//         \
+//          5
+```
+
+## 树结构扁平化
+
+```Javascript
+function flatten(data) {
+  return data.reduce((arr, { children = [], ...rest }) =>
+    arr.concat([rest], flatten(children)), []
+  )
+}
+```
+
+## 源码位置
+
+[tree.js](https://github.com/buildGoodWeb/blog/blob/master/src/demo/typescript/tree.js)
