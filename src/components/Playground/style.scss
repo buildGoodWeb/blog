@@ -4,6 +4,18 @@ $code-error-bg: #f24542;
 
 .playground {
   font-size: 13px;
+  .container {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+  }
+  .item {
+    border: 1px dotted #ccc;
+    margin: 8px;
+  }
+  .margin4 {
+    margin-right: 4px;
+  }
   &.show {
     background-color: $code-bg;
   }
@@ -29,7 +41,10 @@ $code-error-bg: #f24542;
     border: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
-    button {
+    & > div {
+      width: 90%;
+    }
+    & > button {
       opacity: 0;
       align-self: flex-end;
       transition: opacity .3s ease;

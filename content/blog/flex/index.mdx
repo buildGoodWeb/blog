@@ -1,9 +1,12 @@
 ---
 title: Flex 布局
-date: 2019-05-31
+date: 2019-12-17
 tags: CSS
 description: Flex 为传统布局提供了新的解决方案。为左右布局、垂直剧中、文字排版提供了更加简便的写法。
 ---
+
+![flex header](flex-header.png)
+
 ## 容器属性
 有 6 个属性设置在容器上
 
@@ -26,6 +29,215 @@ flex-flow 属性是 flex-direction 属性和 flex-wrap 属性的简写形式，�
 - flex-basis 项目占据的主轴空间；
 - flex flex 属性是 flex-grow, flex-shrink 和 flex-basis 的简写，默认值为 0 1 auto；
 - align-self 项目有与其他项目不一样的对齐方式。
+
+## 实时调试
+
+### flex-grow、flex-shrink
+
+```jsx run
+() => {
+  const [width, setWidth] = React.useState('100px');
+  const containerStyle = {
+    display: 'flex',
+  };
+  const itemStyle = { width };
+  const btns = [
+    { w: '100px', t: '放大填充' },
+    { w: '450px', t: '缩小适配' },
+  ]
+  return (
+    <>
+      <div className="container" style={containerStyle}>
+        <div className="item" style={{ ...itemStyle, flexShrink: 3 }}>1</div>
+        <div className="item" style={{ ...itemStyle, flexGrow: 2 }}>2</div>
+        <div className="item" style={itemStyle}>3</div>
+      </div>
+      {btns.map(item => (
+        <button className={`margin4 pure-button${width === item.w ? ' pure-button-primary' : ''}`} onClick={() => setWidth(item.w)} key={item.w}>
+          {item.t}
+        </button>
+      ))}
+    </>
+  )
+}
+```
+
+### flex-wrap
+
+```jsx run
+() => {
+  const [fw, setFw] = React.useState('nowrap');
+  const containerStyle = {
+    display: 'flex',
+    flexWrap: fw
+  };
+  const itemStyle = {
+    width: '300px',
+  };
+  return (
+    <>
+      <div className="container" style={containerStyle}>
+        <div className="item" style={itemStyle}>1</div>
+        <div className="item" style={itemStyle}>2</div>
+        <div className="item" style={itemStyle}>3</div>
+        <div className="item" style={itemStyle}>4</div>
+        <div className="item" style={itemStyle}>5</div>
+      </div>
+      <div>
+        {['nowrap', 'wrap', 'wrap-reverse'].map(item => (
+          <button className={`margin4 pure-button${fw === item ? ' pure-button-primary' : ''}`} onClick={() => setFw(item)} key={item}>
+            {item}
+          </button>
+        ))}
+      </div>
+    </>
+  )
+}
+```
+
+### flex-direction
+
+```jsx run
+() => {
+  const [direction, setDirection] = React.useState('row');
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: direction
+  };
+  const itemStyle = {
+    flex: 'auto',
+  };
+  return (
+    <>
+      <div className="container" style={containerStyle}>
+        <div className="item" style={itemStyle}>1</div>
+        <div className="item" style={itemStyle}>2</div>
+        <div className="item" style={itemStyle}>3</div>
+      </div>
+      <div>
+        {['row', 'row-reverse', 'column', 'column-reverse'].map(item => (
+          <button className={`margin4 pure-button${direction === item ? ' pure-button-primary' : ''}`} onClick={() => setDirection(item)} key={item}>
+            {item}
+          </button>
+        ))}
+      </div>
+    </>
+  )
+}
+```
+
+### align-items、align-self
+
+```jsx run
+() => {
+  const [pSelf, setPSelf] = React.useState('center');
+  const [self, setSelf] = React.useState('auto');
+  const containerStyle = {
+    display: 'flex',
+    alignItems: pSelf,
+    height: '100px'
+  };
+  const itemStyle = {
+    width: '300px',
+  };
+  return (
+    <>
+      <div className="container" style={containerStyle}>
+        <div className="item" style={itemStyle}>1</div>
+        <div className="item" style={itemStyle}>2</div>
+        <div className="item" style={itemStyle}>3</div>
+        <div className="item" style={{ ...itemStyle, alignSelf: self }}>4</div>
+        <div className="item" style={itemStyle}>5</div>
+      </div>
+      <p>
+        <b>父元素 align-items：</b>
+        {['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'].map(item => (
+          <button className={`margin4 pure-button${pSelf === item ? ' pure-button-primary' : ''}`} onClick={() => setPSelf(item)} key={`p-${item}`}>
+            {item}
+          </button>
+        ))}
+      </p>
+      <p>
+        <b>子元素 align-self：</b>
+        {['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'].map(item => (
+          <button className={`margin4 pure-button${self === item ? ' pure-button-primary' : ''}`} onClick={() => setSelf(item)} key={item}>
+            {item}
+          </button>
+        ))}
+      </p>
+    </>
+  )
+}
+```
+
+### align-content
+
+```jsx run
+() => {
+  const [ac, setAc] = React.useState('flex-start');
+  const containerStyle = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    height: '200px',
+    justifyContent: ac
+  };
+  const itemStyle = {
+    width: '300px',
+    height: '35px'
+  };
+  return (
+    <>
+      <div className="container" style={containerStyle}>
+        <div className="item" style={itemStyle}>1</div>
+        <div className="item" style={itemStyle}>2</div>
+        <div className="item" style={itemStyle}>3</div>
+        <div className="item" style={itemStyle}>4</div>
+        <div className="item" style={itemStyle}>5</div>
+      </div>
+      <div>
+        {['normal', 'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly', 'stretch'].map(item => (
+          <button className={`margin4 pure-button${ac === item ? ' pure-button-primary' : ''}`} onClick={() => setAc(item)} key={item}>
+            {item}
+          </button>
+        ))}
+      </div>
+    </>
+  )
+}
+```
+
+
+### justify-content
+
+```jsx run
+() => {
+  const [jc, setJc] = React.useState('flex-start');
+  const containerStyle = {
+    display: 'flex',
+    justifyContent: jc
+  };
+  const itemStyle = {
+    width: '100px'
+  };
+  return (
+    <>
+      <div className="container" style={containerStyle}>
+        <div className="item" style={itemStyle}>1</div>
+        <div className="item" style={itemStyle}>2</div>
+        <div className="item" style={itemStyle}>3</div>
+      </div>
+      <div>
+        {['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'].map(item => (
+          <button className={`margin4 pure-button${jc === item ? ' pure-button-primary' : ''}`} onClick={() => setJc(item)} key={item}>
+            {item}
+          </button>
+        ))}
+      </div>
+    </>
+  )
+}
+```
+
 
 ## 文档
 - https://www.w3.org/TR/css-flexbox-1/
