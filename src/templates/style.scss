@@ -11,6 +11,9 @@ body, html {
 a {
   color: #0078e7;
   text-decoration: none;
+  &:hover {
+    opacity: .9;
+  }
 }
 code {
   font-size: 87.5%;
@@ -43,6 +46,10 @@ details {
       font-size: 14px;
       padding-left: 10px;
       color: #bbb;
+    }
+    a {
+      font-size: 16px;
+      padding-left: 12px;
     }
   }
 }
