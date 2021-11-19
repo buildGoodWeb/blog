@@ -1,0 +1,11 @@
+---
+title: 观察者模式实现懒加载
+date: 2021-06-11
+tag: React
+description: 观察者模式实现懒加载
+---
+
+### 介绍
+
+以前数据动态加载的场景，需要通过监听 `scroll` 或者设置定时器 `setInterval` 来反复确认元素是否进入可视区，`scroll` 计算量很大，会有性能问题，
+`IntersectionObserver` 可以监听元素是否进入设备或者元素可视区，从而执行对应的操作。
