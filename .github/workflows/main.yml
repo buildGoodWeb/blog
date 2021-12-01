@@ -11,7 +11,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
 
     - name: Build and Deploy to gh-pages
       uses: JamesIves/github-pages-deploy-action@master
