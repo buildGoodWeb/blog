@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "author": "kailang <wkl2418904055@163.com>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/buildGoodWeb/blog/issues"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.0.20",
@@ -46,11 +46,10 @@
     "url": "git+https://github.com/buildGoodWeb/blog.git"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "rm -rf public && rm -rf .cache && gatsby build --prefix-paths",
     "start": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "serve": "gatsby serve",
-    "deploy": "rm -rf public && rm -rf .cache && gatsby build --prefix-paths && yarn docs",
-    "docs": "gh-pages -d public"
+    "deploy": "gh-pages -d public"
   }
 }
