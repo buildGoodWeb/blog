@@ -34,7 +34,7 @@ class BlogPostTemplate extends React.Component {
         <h1>
           {post.frontmatter.title}
           <span>{post.frontmatter.date}</span>
-          <a target="_blank" rel="noopener noreferrer" href={pdf.publicURL} title={`打开 ${pdf.relativePath} 文件`}>&Theta;</a>
+          {pdf && <a target="_blank" rel="noopener noreferrer" href={pdf.publicURL} title={`打开 ${pdf.relativePath} 文件`}>&Theta;</a>}
         </h1>
         <Toc headings={headings} location={this.props.location} />
         <MDXProvider components={components}>
